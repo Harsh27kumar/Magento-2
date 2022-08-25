@@ -1,0 +1,20 @@
+{
+    "name": "evince/cutofftime",
+    "description": "Evince Cutofftime",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0"
+    },
+    "type": "magento2-module",
+    "license": [
+        "Commercial"
+    ],
+    "version": "1.0.1",
+	"authors": [
+		{
+		  "name": "Ananya",
+		  "email": "ananyag155@gmail.com",
+		  "homepage": "",
+		  "role": "Developer"
+		}
+	]
+}

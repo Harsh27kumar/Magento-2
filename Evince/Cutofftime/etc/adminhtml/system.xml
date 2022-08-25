@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<system>
+<tab id="injured" sortOrder="999" translate="label">
+<label>Evince Cutofftime</label>
+</tab>
+<section id="fedex_settings" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label">
+<label>Timer Settings</label>
+<tab>injured</tab>
+<resource>Evince_Cutofftime::config_injured_fedex</resource>
+<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label">
+<label>General</label>
+<field id="enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label" type="select">
+<label>Enabled</label>
+<comment/>
+<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+</field>
+<field id="groundcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="2">
+<label>USPS - Standard Shipping</label>
+</field>
+<field id="saturdays_standardshipping_usps" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="9" sortOrder="3">
+<label>USPS - Standard Shipping </label>
+<comment>This will only show up on Saturday</comment>
+</field>
+
+<field id="monfriuspsexpcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="4">
+<label>UPS - Ground</label>
+</field>
+<field id="satuspsexpcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="5">
+<label>UPS - Overnight</label>
+</field>
+<field id="saturday_overnight_ups" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="6">
+<label>UPS - Saturday Overnight </label>
+<comment>This will only show up on friday</comment>
+</field>
+<field id="saturdays_ground_ups" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="7">
+<label>UPS - Ground</label>
+<comment>This will only show up on Saturday</comment>
+</field>
+<field id="saturdays_overnight_ups" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="8">
+<label>UPS - Overnight</label>
+<comment>This will only show up on Saturday</comment>
+</field>
+
+
+<field id="thufriexpcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="9">
+<label> FedEx - Overnight</label>
+</field>
+<field id="mfexpcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+<label>FedEx - PRIORITY Overnight </label>
+</field>
+<field id="satexpcutoff" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="11">
+<label>FedEx - 2 Day</label>
+</field>
+<field id="saturday_overnight_fedEx" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="12">
+<label>FedEx - Saturday Overnight </label>
+<comment>This will only show up on friday</comment>
+</field>
+<field id="saturdays_overnight_fedEx" translate="label" type="time" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="13">
+<label>FedEx - Overnight</label>
+<comment>This will only show up on Saturday</comment>
+</field>
+
+
+
+</group>
+</section>
+</system>
+</config>

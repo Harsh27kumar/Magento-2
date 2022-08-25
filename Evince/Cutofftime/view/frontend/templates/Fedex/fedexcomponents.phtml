@@ -1,0 +1,722 @@
+<?php
+/**
+ * Copyright � Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//$isHome = $objectManager->create('Magento\Theme\Block\Html\Header\Logo')->isHomePage();
+$scopeConfigObject = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface');
+$enableFedex = $scopeConfigObject->getValue('fedex_settings/general/enabled');
+$baseurl = $block->getBaseUrl();
+$urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+$currenturl = $urlInterface->getCurrentUrl();
+?>
+
+    <div class="fed-ex-content"  >
+        <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('shipping_cutoff_time')->toHtml(); ?>
+
+    </div>
+    <?php
+    if ($enableFedex) {
+        ?>
+        <?php
+        $gtime = $scopeConfigObject->getValue('fedex_settings/general/groundcutoff');
+        $groundCutOff = str_replace(',', ':', $gtime);
+        $mftime = $scopeConfigObject->getValue('fedex_settings/general/mfexpcutoff');
+        $MontoFriExpressCutOff = str_replace(',', ':', $mftime);
+        $stime = $scopeConfigObject->getValue('fedex_settings/general/satexpcutoff');
+        $SatExpressCutOff = str_replace(',', ':', $stime);
+        $thutofritime = $scopeConfigObject->getValue('fedex_settings/general/thufriexpcutoff');
+        $ThutoFriExpressCutOff = str_replace(',', ':', $thutofritime);
+        //$time = explode(',',$thutofritime);
+        $monfriuspsexpcutoff = $scopeConfigObject->getValue('fedex_settings/general/monfriuspsexpcutoff');
+        $MontoFriUSPSExpressCutOff = str_replace(',', ':', $monfriuspsexpcutoff);
+        $satuspsexpcutoff = $scopeConfigObject->getValue('fedex_settings/general/satuspsexpcutoff');
+        $SatUSPSExpressCutOff = str_replace(',', ':', $satuspsexpcutoff);
+		
+		/* start for friday settings */ 
+		$saturday_overnight_fedEx = $scopeConfigObject->getValue('fedex_settings/general/saturday_overnight_fedEx');
+        $SaturdayOvernightFedEx = str_replace(',', ':', $saturday_overnight_fedEx);
+		
+		$saturday_overnight_ups = $scopeConfigObject->getValue('fedex_settings/general/saturday_overnight_ups');
+        $SaturdayOvernightUps = str_replace(',', ':', $saturday_overnight_ups);
+		/* end for friday settings */ 
+		
+		/* start for Saturday  settings */ 
+		$saturdays_standardshipping_usps = $scopeConfigObject->getValue('fedex_settings/general/saturdays_standardshipping_usps');
+        $SaturdaysStandardshippingUsps = str_replace(',', ':', $saturdays_standardshipping_usps);
+		//echo "<br>".$SaturdaysStandardshippingUsps;
+		
+		$saturdays_ground_ups = $scopeConfigObject->getValue('fedex_settings/general/saturdays_ground_ups');
+        $SaturdaysGroundUps = str_replace(',', ':', $saturdays_ground_ups);
+		//echo "<br>".$SaturdaysGroundUps;
+		
+		$saturdays_overnight_ups = $scopeConfigObject->getValue('fedex_settings/general/saturdays_overnight_ups');
+        $SaturdaysOvernightUps = str_replace(',', ':', $saturdays_overnight_ups);
+		//echo "<br>".$SaturdaysOvernightUps;
+		
+		$saturdays_overnight_fedEx = $scopeConfigObject->getValue('fedex_settings/general/saturdays_overnight_fedEx');
+        $SaturdaysOvernightFedEx = str_replace(',', ':', $saturdays_overnight_fedEx);
+		//echo "<br>".$SaturdaysOvernightFedEx;
+		
+		/* end for Saturday settings */ 
+        ?>
+        <?php ?>
+            <script type="text/javascript">
+                require(['jquery', 'Magento_Theme/js/moment.min', 'Magento_Theme/js/moment-timezone-with-data'], function (jQuery) {
+                    var currenturl = "<?php echo $currenturl; ?>";
+                    var baseurl = "<?php echo $baseurl; ?>";
+                    var requestedurl = baseurl + 'checkout/';
+
+                   // if (currenturl != requestedurl) {
+
+                        jQuery(document).ready(function () {
+                            var _second = 1000;
+                            var _minute = _second * 60;
+                            var _hour = _minute * 60;
+                            var _day = _hour * 24;
+                            var counter = setInterval(timer, 10);
+							  jQuery(".fed-ex-content").mouseover(function(){	  
+                            	  jQuery("i#topIcon").removeClass("fa-angle-up");  //Toggle the active class to the area is hovered
+                                  jQuery("i#topIcon").addClass("fa-angle-down");  //Toggle the active class to the area is hovered
+                              });
+                                jQuery(".fed-ex-content").mouseout(function(){	  
+                            	  jQuery("i#topIcon").removeClass("fa-angle-down");  //Toggle the active class to the area is hovered
+                                  jQuery("i#topIcon").addClass("fa-angle-up");  //Toggle the active class to the area is hovered
+                              });
+                        });
+                        function pad2(number) {
+                            return (number < 10 ? '0' : '') + number;
+                        }
+                        function timer() {
+                            var _second = 1000;
+                            var _minute = _second * 60;
+                            var _hour = _minute * 60;
+                            var _day = _hour * 24;
+                            var moment = require('moment');
+                            var serverDate = moment().tz("America/New_York");
+                            var newnow = new Date(serverDate.year(), serverDate.month(), serverDate.date(), serverDate.hour(), serverDate.minute(), serverDate.second());
+                            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                            //document.getElementById('single_sat_div').css("display","none");
+                            document.getElementById("single_sat_div").style.display = 'none';
+            //                    alert("serverDate.day()"+serverDate.day());
+            //                    alert("serverDate.hour()"+serverDate.hour());
+							
+							
+							
+							
+		
+											
+                            if (serverDate.day() == 0) {
+
+                                jQuery('.shipping-title').css("margin-top", "10px");
+                                document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder"> Standard Shipping  All Further orders ship Monday</p>';
+                                document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight  All Further orders ship Monday</p>';
+                                document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day  All Further orders ship Monday</p>';
+                                document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">Ground  All Further orders ship Monday</p>';
+                                document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">Overnight  All Further orders ship Monday</p>';
+                                document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Overnight  All Further orders ship Monday</p>';
+                               // document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                // document.getElementsByClassName('out_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+
+                                //jQuery('#overnight_time_img').hide();
+                                jQuery('#satuarday_time_img').hide();
+                                jQuery('.expand_icon').css("margin-top", "40px");
+                                
+							 } 								 
+                             else if (serverDate.day() == 5) {
+                                var end = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $groundCutOff; ?>');
+                                var distance = end - newnow;
+                                if (distance < 0) {
+                                    jQuery('#single_div').hide();
+                                    document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All further order ship Tomorrow</p>';
+                                    //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All further order ship Tomorrow</p>';
+                                    //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+
+                                } else {
+                                    var hours = pad2(Math.floor((distance % _day) / _hour));
+                                    var minutes = pad2(Math.floor((distance % _hour) / _minute));
+                                    var seconds = pad2(Math.floor((distance % _minute) / _second));
+                                    //document.getElementById('timer_message').innerHTML = '';
+                                    if (hours == 00 && minutes == 00 && seconds == 00) {
+                                        document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All further order ship Tomorrow</p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All further order ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    } else {
+                                       
+                                        if (serverDate.hour() <= 19)
+                                        {
+
+                                            console.log('server hour : ' + serverDate.hour());
+                                            var satend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $ThutoFriExpressCutOff; ?>');
+                                            var satenddate = new Date(satend.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                            var satdistance = satenddate - newnow;
+
+                                            var sathours = pad2(Math.floor(satdistance / 1000 / 60 / 60));
+                                            var satminutes = pad2(Math.floor((satdistance % _hour) / _minute));
+                                            var satseconds = pad2(Math.floor((satdistance % _minute) / _second));
+
+                                           
+                                        } else {
+
+                                            console.log('server hour : ' + serverDate.hour());
+                                            document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder"> Standard Shipping  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span> </p>';
+
+                                        }
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + hours + 'HRS</span><span class="minutes">' + minutes + ':</span><span class="seconds">' + seconds + 'ss</span><p>FEDEX GROUND</p> ';
+                                    }
+                                }
+                                var secend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriExpressCutOff; ?>');
+                                var secondudate = new Date(secend.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var secdistance = secondudate - newnow;
+                                if (secdistance < 0) {
+                                    document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                    document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                    document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                  
+                                } else {
+                                    var sechours = pad2(Math.floor(secdistance / 1000 / 60 / 60));
+                                    var secminutes = pad2(Math.floor((secdistance % _hour) / _minute));
+                                    var secseconds = pad2(Math.floor((secdistance % _minute) / _second));
+                                    if (sechours == 00 && secminutes == 00 && secseconds == 00) {
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                       
+                                    } else {
+                                        
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+										/* document.getElementById('out-time').innerHTML = '<p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> '; */
+                                    }
+                                }
+                                var usps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriUSPSExpressCutOff; ?>');
+                                var uspsdistance = usps - newnow;
+                                if (uspsdistance < 0) {
+                                    document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                    document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                    //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                } else {
+                                    var sathours = pad2(Math.floor((uspsdistance % _day) / _hour));
+                                    var sathourssingle = pad2(Math.floor((uspsdistance % _day) / _hour) + 3);
+                                    var satGroundhourssingle = pad2(Math.floor((uspsdistance % _day) / _hour) + 2);
+                                    var satminutes = pad2(Math.floor((uspsdistance % _hour) / _minute));
+                                    var satminutessingle = pad2(Math.floor((uspsdistance % _hour) / _minute) + 30);
+                                    if (parseInt(satminutessingle) > 59)
+                                    {
+                                        satminutessingle = parseInt(satminutessingle) - 60;
+                                        sathourssingle = parseInt(sathourssingle) + 1;
+                                    }
+                                    var satseconds = pad2(Math.floor((uspsdistance % _minute) / _second));
+                                    if (sathours == 00 && satminutes == 00 && satseconds == 00) {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    } else {
+                                        //document.getElementById('timer_message').innerHTML = '';
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">Ground  </p><p class="time_show"><span>' + sathours + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span></p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + sathours + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span></p>';
+										
+                                        //4-9-2020document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Saturday</p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+										document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder"> Standard Shipping  </p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight  </p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day  </p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+										document.getElementById('out-time').innerHTML = '<p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span></p> ';
+                                       //4-9-2020 document.getElementById("single_sat_div").style.display = 'block';
+            //   document.getElementById('usps_first_div').innerHTML = '<p class="anyfutherorder">Saturday</p><p class="time_show"><span>' + sathourssingle + '<b>:</b></span><span>' + satminutessingle + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';  
+                                        //4-9-2020document.getElementById('satuarday_time').innerHTML = '<p class="anyfutherorder">Priority Overnight CutOff<br/><span>(Saturday Delivery)</span></p><p class="time_show"><span>' + sathours + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span></p>';
+
+                                        document.getElementById('single_sat_timer').innerHTML = '<p class="anyfutherorder">Standard Shipping  </p><p class="time_show"><span>' + satGroundhourssingle + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span> </p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sathourssingle + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + satminutessingle + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + satseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="overnight_msg">Overnight</span> ';
+										
+							/* saturday_overnight_fedEx start*/ 
+							document.getElementById("saturday_overnight_fedEx").style.display = 'block';
+							var saturday_overnight_fedEx = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdayOvernightFedEx; ?>');
+                                var saturday_overnight_fedEx_date = new Date(saturday_overnight_fedEx.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var saturday_overnight_fedEx_distance = saturday_overnight_fedEx_date - newnow;
+								//console.log(saturday_overnight_fedEx_distance);
+								
+							
+								  var saturday_overnight_fedEx_hours = pad2(Math.floor((saturday_overnight_fedEx_distance % _day) / _hour));
+                                    var saturday_overnight_fedEx_minutes = pad2(Math.floor((saturday_overnight_fedEx_distance % _hour) / _minute));
+                                    var saturday_overnight_fedEx_seconds = pad2(Math.floor((saturday_overnight_fedEx_distance % _minute) / _second));
+									
+									if (saturday_overnight_fedEx_hours == 00 && saturday_overnight_fedEx_minutes == 00 && saturday_overnight_fedEx_seconds == 00) {
+									document.getElementById("saturday_overnight_fedEx").style.display = 'none';							 
+							 }
+							 if(serverDate.hour() >= 19 && serverDate.minute() >= 30){
+									document.getElementById("saturday_overnight_fedEx").style.display = 'none';									
+								}else{
+                                            document.getElementById('saturday_overnight_fedEx_time').innerHTML = '<p class="anyfutherorder">Saturday Overnight  </p><p class="time_show"><span>' + saturday_overnight_fedEx_hours + '<b>:</b></span><span>' + saturday_overnight_fedEx_minutes + '<b>:</b></span><span>' + saturday_overnight_fedEx_seconds + '<b></b></span></p> ';
+							 }
+							
+							/* saturday_overnight_fedEx end*/ 
+
+							
+							/* SaturdayOvernightUps start */ 
+							document.getElementById("saturday_overnight_ups").style.display = 'block';
+							var saturdayOvernightUps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdayOvernightUps; ?>');
+                                var saturdayOvernightUps_date = new Date(saturdayOvernightUps.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var saturdayOvernightUps_distance = saturdayOvernightUps_date - newnow;
+							
+						 var saturdayOvernightUps_hours = pad2(Math.floor((saturdayOvernightUps_distance % _day) / _hour));
+                                    var saturdayOvernightUps_minutes = pad2(Math.floor((saturdayOvernightUps_distance % _hour) / _minute));
+                                    var saturdayOvernightUps_seconds = pad2(Math.floor((saturdayOvernightUps_distance % _minute) / _second));
+										if (saturdayOvernightUps_hours == 00 && saturdayOvernightUps_minutes == 00 && saturdayOvernightUps_seconds == 00) {
+									document.getElementById("saturday_overnight_ups").style.display = 'none';
+							 
+							 }
+							 if(serverDate.hour() >= 19 && serverDate.minute() >= 00){
+									document.getElementById("saturday_overnight_ups").style.display = 'none';									
+								}
+							 else{
+                                            document.getElementById('saturday_overnight_ups_time').innerHTML = '<p class="anyfutherorder">Saturday Overnight  </p><p class="time_show"><span>' + saturdayOvernightUps_hours + '<b>:</b></span><span>' + saturdayOvernightUps_minutes + '<b>:</b></span><span>' + saturdayOvernightUps_seconds + '<b></b></span></p> ';
+							 }
+							/* SaturdayOvernightUps end*/ 
+                                    }
+                                }
+                            } else if (serverDate.day() == 6) {
+								
+								document.getElementById("single_div").style.display = 'none';
+								
+								document.getElementById("usps_first_div").style.display = 'none';
+								document.getElementById("usps_priority_div").style.display = 'none';
+								
+								document.getElementById("overnight_div").style.display = 'none';
+								document.getElementById("international_single_div").style.display = 'none';
+								document.getElementById("today_single_div").style.display = 'none';
+								
+								
+								
+								
+								
+									/* SaturdaysStandardshippingUsps start */ 
+							document.getElementById("saturdays_overnight_usps").style.display = 'block';
+							var SaturdaysStandardshippingUsps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdaysStandardshippingUsps; ?>');
+                                var SaturdaysStandardshippingUsps_date = new Date(SaturdaysStandardshippingUsps.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var SaturdaysStandardshippingUsps_distance = SaturdaysStandardshippingUsps_date - newnow;
+							
+							
+								 
+						 var SaturdaysStandardshippingUsps_hours = pad2(Math.floor((SaturdaysStandardshippingUsps_distance % _day) / _hour));
+                                    var SaturdaysStandardshippingUsps_minutes = pad2(Math.floor((SaturdaysStandardshippingUsps_distance % _hour) / _minute));
+                                    var SaturdaysStandardshippingUsps_seconds = pad2(Math.floor((SaturdaysStandardshippingUsps_distance % _minute) / _second));
+								
+								
+								if (SaturdaysStandardshippingUsps_hours == 00 && SaturdaysStandardshippingUsps_minutes == 00 && SaturdaysStandardshippingUsps_seconds == 00) {
+									document.getElementById("saturdays_overnight_usps").style.display = 'none';
+									document.getElementById("single_div").style.display = 'block';
+								}
+								if(serverDate.hour() >= 14 && serverDate.minute() >= 00){
+									document.getElementById("saturdays_overnight_usps").style.display = 'none';
+									document.getElementById("single_div").style.display = 'block';
+									
+								}else{
+									document.getElementById('saturdays_overnight_usps_time').innerHTML = '<p class="anyfutherorder">Standard Shipping  </p><p class="time_show"><span>' + SaturdaysStandardshippingUsps_hours + '<b>:</b></span><span>' + SaturdaysStandardshippingUsps_minutes + '<b>:</b></span><span>' + SaturdaysStandardshippingUsps_seconds + '<b></b></span></p> ';
+								}
+							/* SaturdayOvernightUps end*/ 
+							
+							
+							
+							
+							/* SaturdaysGroundUps start */ 
+							document.getElementById("saturdays_ground_ups").style.display = 'block';
+							var SaturdaysGroundUps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdaysGroundUps; ?>');
+                                var SaturdaysGroundUps_date = new Date(SaturdaysGroundUps.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var SaturdaysGroundUps_distance = SaturdaysGroundUps_date - newnow;
+							
+							
+								 
+						 var SaturdaysGroundUps_hours = pad2(Math.floor((SaturdaysGroundUps_distance % _day) / _hour));
+                                    var SaturdaysGroundUps_minutes = pad2(Math.floor((SaturdaysGroundUps_distance % _hour) / _minute));
+                                    var SaturdaysGroundUps_seconds = pad2(Math.floor((SaturdaysGroundUps_distance % _minute) / _second));
+								
+								
+								if (SaturdaysGroundUps_hours == 00 && SaturdaysGroundUps_minutes == 00 && SaturdaysGroundUps_seconds == 00) {
+									document.getElementById("saturdays_ground_ups").style.display = 'none';
+									
+									document.getElementById("usps_first_div").style.display = 'block';
+								document.getElementById("usps_priority_div").style.display = 'block';
+								}
+								if(serverDate.hour() >= 16 && serverDate.minute() >= 00){
+									document.getElementById("saturdays_ground_ups").style.display = 'none';
+									
+									document.getElementById("usps_first_div").style.display = 'block';
+									document.getElementById("usps_priority_div").style.display = 'block';
+								}else{
+									document.getElementById('saturdays_ground_ups_time').innerHTML = '<p class="anyfutherorder">Ground  </p><p class="time_show"><span>' + SaturdaysGroundUps_hours + '<b>:</b></span><span>' + SaturdaysGroundUps_minutes + '<b>:</b></span><span>' + SaturdaysGroundUps_seconds + '<b></b></span></p> ';
+								}
+							/* SaturdaysGroundUps end*/ 
+							
+												/* SaturdaysOvernightUps start */ 
+							document.getElementById("saturdays_overnight_ups").style.display = 'block';
+							var SaturdaysOvernightUps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdaysOvernightUps; ?>');
+                                var SaturdaysOvernightUps_date = new Date(SaturdaysOvernightUps.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var SaturdaysOvernightUps_distance = SaturdaysOvernightUps_date - newnow;
+							
+							
+								 
+						 var SaturdaysOvernightUps_hours = pad2(Math.floor((SaturdaysOvernightUps_distance % _day) / _hour));
+                                    var SaturdaysOvernightUps_minutes = pad2(Math.floor((SaturdaysOvernightUps_distance % _hour) / _minute));
+                                    var SaturdaysOvernightUps_seconds = pad2(Math.floor((SaturdaysOvernightUps_distance % _minute) / _second));
+								
+								
+								if (SaturdaysOvernightUps_hours == 00 && SaturdaysOvernightUps_minutes == 00 && SaturdaysOvernightUps_seconds == 00) {
+									document.getElementById("saturdays_overnight_ups").style.display = 'none';
+									
+									document.getElementById("overnight_div").style.display = 'block';
+								document.getElementById("international_single_div").style.display = 'block';
+								document.getElementById("today_single_div").style.display = 'block';
+								}
+								if(serverDate.hour() >= 16 && serverDate.minute() >= 00){
+									document.getElementById("saturdays_overnight_ups").style.display = 'none';
+									
+									document.getElementById("overnight_div").style.display = 'block';
+								document.getElementById("international_single_div").style.display = 'block';
+								document.getElementById("today_single_div").style.display = 'block';
+								}else{
+									document.getElementById('saturdays_overnight_ups_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + SaturdaysOvernightUps_hours + '<b>:</b></span><span>' + SaturdaysOvernightUps_minutes + '<b>:</b></span><span>' + SaturdaysOvernightUps_seconds + '<b></b></span></p> ';
+								}
+							/* SaturdaysOvernightUps end*/ 
+							
+							
+										/* SaturdaysOvernightFedEx start */ 
+							document.getElementById("saturdays_overnight_fedEx").style.display = 'block';
+							var SaturdaysOvernightFedEx = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SaturdaysOvernightFedEx; ?>');
+
+                                var SaturdaysOvernightFedEx_date = new Date(SaturdaysOvernightFedEx.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                var SaturdaysOvernightFedEx_distance = SaturdaysOvernightFedEx_date - newnow;
+							
+							
+								 
+						 var SaturdaysOvernightFedEx_hours = pad2(Math.floor((SaturdaysOvernightFedEx_distance % _day) / _hour));
+                                    var SaturdaysOvernightFedEx_minutes = pad2(Math.floor((SaturdaysOvernightFedEx_distance % _hour) / _minute));
+                                    var SaturdaysOvernightFedEx_seconds = pad2(Math.floor((SaturdaysOvernightFedEx_distance % _minute) / _second));
+								
+								
+								if (SaturdaysOvernightFedEx_hours == 00 && SaturdaysOvernightFedEx_minutes == 00 && SaturdaysOvernightFedEx_seconds == 00) {
+									document.getElementById("saturdays_overnight_fedEx").style.display = 'none';
+								}
+								if(serverDate.hour() >= 14 && serverDate.minute() >= 00){
+									document.getElementById("saturdays_overnight_fedEx").style.display = 'none';
+								}else{
+									document.getElementById('saturdays_overnight_fedEx_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + SaturdaysOvernightFedEx_hours + '<b>:</b></span><span>' + SaturdaysOvernightFedEx_minutes + '<b>:</b></span><span>' + SaturdaysOvernightFedEx_seconds + '<b></b></span></p> ';
+									document.getElementById('out-time').innerHTML = '<p class="time_show"><span>' + SaturdaysOvernightFedEx_hours + '<b>:</b></span><span>' + SaturdaysOvernightFedEx_minutes + '<b>:</b></span><span>' + SaturdaysOvernightFedEx_seconds + '<b></b></span></p> ';
+								}
+							/* SaturdaysOvernightFedEx end*/ 
+							
+							
+							
+								
+                                //jQuery('#satuarday_time_img').hide();
+                                //jQuery('#overnight_time_img').hide();
+                                document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Standard Shipping  All Further orders ship Monday</p>';
+                                document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                               //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                //document.getElementById('timer_message').innerHTML = '<p>ANY FURTHER ORDERS WILL SHIP MONDAY</p>';
+                                //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                var secend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SatExpressCutOff; ?>');
+                                var secdistance = secend - newnow;
+                                if (secdistance < 0) {
+                                    document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Ground  All Further orders ship Monday</p>';
+                                    document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+
+                                    document.getElementById('single_div').innerHTML = '<p class="anyfutherorder">Ground  All Further orders ship Monday</p>';
+                                    document.getElementById('international_single_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    document.getElementById('today_single_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    document.getElementById('overnight_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    document.getElementsByClassName('out_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+
+                                    //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    // document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">ANY FURTHER ORDERS WILL SHIP MONDAY</p>';
+                                } else {
+                                    var sechours = pad2(Math.floor((secdistance % _day) / _hour));
+                                    var secminutes = pad2(Math.floor((secdistance % _hour) / _minute));
+                                    var secseconds = pad2(Math.floor((secdistance % _minute) / _second));
+                                    //console.log('sat :'+sechours+':'+secminutes+':'+secseconds);
+                                    if (sechours == 00 && secminutes == 00 && secseconds == 00) {
+                                        document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Ground  All Further orders ship Monday</p>';
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+
+                                        document.getElementById('single_div').innerHTML = '<p class="anyfutherorder">Ground  All Further orders ship Monday</p>';
+                                        document.getElementById('international_single_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        document.getElementById('today_single_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        document.getElementById('overnight_div').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        document.getElementsByClassName('out_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        // document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">ANY FURTHER ORDERS WILL SHIP MONDAY</p>';
+                                    } else {
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder"> Overnight  All Further orders ship Monday </p> ';
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder"> PRIORITY Overnight  All Further orders ship Monday </p>';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day  All Further orders ship Monday </p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sechours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + secminutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + secseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="overnight_msg">Overnight</span> ';
+                                    }
+                                }
+
+                                var uspsend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $SatUSPSExpressCutOff; ?>');
+                                var uspsdistance = uspsend - newnow;
+                                if (uspsdistance < 0) {
+                                    document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                    document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                    //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                    // document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">ANY FURTHER ORDERS WILL SHIP MONDAY</p>';
+                                } else {
+                                    var sechours = pad2(Math.floor((uspsdistance % _day) / _hour));
+                                    var secminutes = pad2(Math.floor((uspsdistance % _hour) / _minute));
+                                    var secseconds = pad2(Math.floor((uspsdistance % _minute) / _second));
+                                    if (sechours == 00 && secminutes == 00 && secseconds == 00) {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Monday</p>';
+                                        //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        // document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">ANY FURTHER ORDERS WILL SHIP MONDAY</p>';
+                                    } else {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder"> Ground  All Further orders ship Monday</span></p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder"> Overnight  All Further orders ship Monday</span></p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sechours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + secminutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + secseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="overnight_msg">Overnight</span> ';
+                                    }
+                                }
+                            } else {
+                                jQuery('#overnight_time_img').show();
+                                jQuery('#satuarday_div').remove();
+                                jQuery('#single_div').width('99%');
+                                var end = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $groundCutOff; ?>');
+                                var distance = end - newnow;
+                                if (distance < 0) {
+                                    if (distance < -3600000) {
+                                        var secend1 = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $groundCutOff; ?>');
+                                        var secondudate1 = new Date(secend1.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                        var distance = secondudate1 - newnow;
+                                        if (distance < 0) {
+                                            document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                           //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        } else {
+                                            var hours = pad2(Math.floor((distance % _day) / _hour));
+                                            var minutes = pad2(Math.floor((distance % _hour) / _minute));
+                                            var seconds = pad2(Math.floor((distance % _minute) / _second));
+                                            // document.getElementById('timer_message').innerHTML = '';
+                                            if (hours == 00 && minutes == 00 && seconds == 00) {
+                                                document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                                //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            } else {
+
+                                                //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + hours + 'HRS</span><span class="minutes">' + minutes + ':</span><span class="seconds">' + seconds + 'ss</span> ';
+
+                                                //document.getElementById('vertical_time').innerHTML = '<span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span> <p class="anyfutherorder">Ground Cutoff</p>';
+                                                if (serverDate.day() >= 4 && (serverDate.hour() >= 19 && serverDate.minute() >= 30)) {
+                                                    var satend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $ThutoFriExpressCutOff; ?>');
+                                                    var satenddate = new Date(satend.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                                    var satdistance = satenddate - newnow;
+
+                                                    var sathours = pad2(Math.floor(satdistance / 1000 / 60 / 60));
+                                                    var satminutes = pad2(Math.floor((satdistance % _hour) / _minute));
+                                                    var satseconds = pad2(Math.floor((satdistance % _minute) / _second));
+
+                                                    //4-9-2020document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Saturday Delivery-2</p><p class="time_show"><span>' + sathours + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span></p> ';
+                                                    //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sathours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + satminutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + satseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="ground_msg">saturday</span> ';
+                                                } else {
+                                                    //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + hours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + minutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + seconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="ground_msg">ground</span> ';
+                                                    document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Standard Shipping  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span><p/> ';
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                    }
+                                } else {
+                                    var hours = pad2(Math.floor((distance % _day) / _hour));
+                                    var minutes = pad2(Math.floor((distance % _hour) / _minute));
+                                    var seconds = pad2(Math.floor((distance % _minute) / _second));
+                                    // document.getElementById('timer_message').innerHTML = '';
+                                    if (hours == 00 && minutes == 00 && seconds == 00) {
+                                        //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+
+                                    } else {
+                                        if (serverDate.day() >= 4 && (serverDate.hour() >= 19 && serverDate.minute() >= 30)) {
+                                            var satend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $ThutoFriExpressCutOff; ?>');
+                                            var satenddate = new Date(satend.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                            var satdistance = satenddate - newnow;
+
+                                            var sathours = pad2(Math.floor(satdistance / 1000 / 60 / 60));
+                                            var satminutes = pad2(Math.floor((satdistance % _hour) / _minute));
+                                            var satseconds = pad2(Math.floor((satdistance % _minute) / _second));
+											
+                                            //4-9-2020document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Saturday Delivery</p><p class="time_show"><span>' + sathours + '<b>:</b></span><span>' + satminutes + '<b>:</b></span><span>' + satseconds + '<b></b></span></p> ';
+                                            //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sathours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + satminutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + satseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="ground_msg">saturday</span> ';
+                                        } else {
+                                            //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + hours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + minutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + seconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="ground_msg">ground</span> ';
+                                            document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">Standard Shipping  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span><p/> ';
+                                        }
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + hours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + minutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + seconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="ground_msg">ground</span> ';
+
+                                        //document.getElementById('vertical_time').innerHTML = '<span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b> </span><p class="anyfutherorder">Ground Cutoff</p>';
+
+                                        //document.getElementById('single_timer').innerHTML = '<p class="anyfutherorder">USPS Standard Shipping </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b> </span></p>';
+                                    }
+                                }
+                                var secend = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriExpressCutOff; ?>');
+                                var secdistance = secend - newnow;
+                                if (secdistance < 0) {
+                                    if (secdistance < -3600000) {
+                                        var secend1 = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriExpressCutOff; ?>');
+                                        var secondudate1 = new Date(secend1.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                        var distance = secondudate1 - newnow;
+                                        if (distance < 0) {
+                                            document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        } else {
+                                            var hours = pad2(Math.floor((distance % _day) / _hour));
+                                            var minutes = pad2(Math.floor((distance % _hour) / _minute));
+                                            var seconds = pad2(Math.floor((distance % _minute) / _second));
+                                            //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            if (hours == 00 && minutes == 00 && seconds == 00) {
+                                                document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                                //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                                //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            } else {
+                                                document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span></p> ';
+                                                document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span></p> ';
+                                                document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span> </p>';
+												document.getElementById('out-time').innerHTML = '<p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span></p> ';
+                                            }
+                                        }
+                                    } else {
+                                        //document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    }
+                                } else {
+                                    var sechours = pad2(Math.floor((secdistance % _day) / _hour));
+                                    var secminutes = pad2(Math.floor((secdistance % _hour) / _minute));
+                                    var secseconds = pad2(Math.floor((secdistance % _minute) / _second));
+                                    if (sechours == 00 && secminutes == 00 && secseconds == 00) {
+                                        //document.getElementById('vertical_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('today_single_timer').innerHTML = '';
+                                        //document.getElementById('international_single_timer').innerHTML = '';
+                                        //document.getElementById('international_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('today_single_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('overnight_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    } else {
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight - </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        //document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day - </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        document.getElementById('international_single_timer').innerHTML = '<p class="anyfutherorder">PRIORITY Overnight  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        document.getElementById('today_single_timer').innerHTML = '<p class="anyfutherorder">2 Day  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        document.getElementById('overnight_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p  class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span> </p>';
+										document.getElementById('out-time').innerHTML = '<p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p> ';
+                                        //document.getElementById('vertical_time').innerHTML = '<span class="hours">' + sechours + '<br/><span class="hrs_mins_secs">HRS</span></span><span class="minutes">' + secminutes + '<br/><span class="hrs_mins_secs">MINS</span></span><span class="seconds">' + secseconds + '<br/><span class="hrs_mins_secs">SECS</span></span><span class="fedx_msg">FedEx</span> <span class="overnight_msg">Overnight</span> ';
+                                    }
+                                }
+
+                                var usps = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriUSPSExpressCutOff; ?>');
+
+                                var uspsdistance = usps - newnow;
+
+                                if (uspsdistance < 0) {
+                                    if (uspsdistance < -3600000) {
+                                        var secend1 = new Date(newnow.getDate() + ' ' + monthNames[newnow.getMonth()] + ' ' + newnow.getFullYear() + ' <?php echo $MontoFriUSPSExpressCutOff; ?>');
+                                        var secondudate1 = new Date(secend1.getTime() + 1 * 24 * 60 * 60 * 1000);
+                                        var distance = secondudate1 - newnow;
+                                        if (distance < 0) {
+                                            document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                            //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        } else {
+                                            var hours = pad2(Math.floor((distance % _day) / _hour));
+                                            var minutes = pad2(Math.floor((distance % _hour) / _minute));
+                                            var seconds = pad2(Math.floor((distance % _minute) / _second));
+                                            //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                            if (hours == 00 && minutes == 00 && seconds == 00) {
+                                                document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                                //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                                //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';         
+                                            } else {
+                                                document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">Ground  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span></p>';
+                                                document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + hours + '<b>:</b></span><span>' + minutes + '<b>:</b></span><span>' + seconds + '<b></b></span></p>';
+                                            }
+                                        }
+                                    } else {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">All Further orders ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '';
+                                        //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    }
+                                } else {
+                                    var sechours = pad2(Math.floor((uspsdistance % _day) / _hour));
+                                    var secminutes = pad2(Math.floor((uspsdistance % _hour) / _minute));
+                                    var secseconds = pad2(Math.floor((uspsdistance % _minute) / _second));
+                                    if (sechours == 00 && secminutes == 00 && secseconds == 00) {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Monday</p>';
+                                        //document.getElementById('usps_first_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                        //document.getElementById('usps_priority_timer_message').innerHTML = '<p class="anyfutherorder">Any further orders will ship Tomorrow</p>';
+                                    } else {
+                                        document.getElementById('usps_first_time').innerHTML = '<p class="anyfutherorder">Ground  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p>';
+                                        document.getElementById('usps_priority_time').innerHTML = '<p class="anyfutherorder">Overnight  </p><p class="time_show"><span>' + sechours + '<b>:</b></span><span>' + secminutes + '<b>:</b></span><span>' + secseconds + '<b></b></span></p>';
+                                    }
+                                }
+                            }
+                        }
+                    // }
+                });
+				
+            </script>
+        <?php  ?>
+
+    <?php }
+	
+ ?>
