@@ -1,0 +1,1 @@
+In this module custom options like mobile number email and image is added at customer registration form.

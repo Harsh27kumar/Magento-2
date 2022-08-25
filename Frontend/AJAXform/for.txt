@@ -1,0 +1,1 @@
+In this module a frontend form is created and data is saved in database using ajax Method.

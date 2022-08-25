@@ -1,0 +1,51 @@
+
+<p id="sg" style="font-size:19px; font-weight:bold;"></p>
+<div class="row">
+    <div class="col-md-8">
+        <form name="addData" method="post" id="addData" class="form"
+              action="<?php echo $this->getFormAction(); ?>"
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+              data-mage-init='{"validation":{}}'
+              id="form-validate-detail">
+            <fieldset class="fieldset">
+                
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field face_book">
+                            <label class="label" for="face_book"><span><?= $block->
+                                escapeHtmlAttr(__('Facebook')) ?></span></label>
+                            <div class="control">
+                                <input name="face_book" id="face_book" title="face_book" value="<?php echo $this->getFacebook();?>" class="input-text" type="text" >
+
+                                      
+                            </div>
+                        </div>
+                    	<div class="">
+                            <label class="label" for="insta_gram"><span><?= $block->
+                                escapeHtmlAttr(__('Instagram')) ?></span></label>
+                            <div class="control">
+                                <input name="insta_gram" id="insta_gram" title="insta_gram" value="<?php echo $this->getInstagram();?>" class="input-text" type="text"
+                                       >
+                            </div>
+                        </div>
+                        <div class="">
+                            <label class="label" for="linked_in"><span><?= $block->
+                                escapeHtmlAttr(__('LinkedIn')) ?></span></label>
+                            <div class="control">
+                                <input name="linked_in" id="linked_in" title="LinkedIn" value="<?php echo $this->getLinkedin();?>" class="input-text" type="text"
+                                      >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="Save"><span><?= $block->
+                        escapeHtmlAttr(__('Submit')) ?></span></button>
+                </div>
+            </div>
+                </fieldset>
+            </fieldset>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,1 @@
+In this module a new menu is added at admin->customer section through which a grid is displayed.

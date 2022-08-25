@@ -1,0 +1,1 @@
+In this module a product attribute is created.

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+  
+  
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Theme\Block\Html\Notices" name="global_notices" template="Website_Header::html/notices.phtml"/>
+        </referenceContainer>
+
+        <move element="minicart" destination="header.panel" before="-"/>
+        
+        <referenceBlock name="advanced-search-link" remove="true"/>
+
+     <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template" name="customblock" after="-" template="Website_Header::extracategories.phtml" />
+        </referenceContainer>
+
+
+ <move element="logo" destination="header.panel" before="-"/>
+
+ <referenceBlock name="header" remove="true"/>
+
+ <referenceBlock name="customer-account-navigation-wish-list-link" remove="true"/>
+
+
+    
+<referenceBlock name="register-link">
+        <arguments>
+            <argument name="label" xsi:type="string" translate="true">Sign Up</argument>
+        </arguments>
+    </referenceBlock>
+ 
+
+ 
+      <referenceContainer name="header-wrapper">                 
+                     <block class="Website\Header\Block\ContactForm" name="region" after="-" template="Website_Header::form.phtml">
+                     </block>
+         </referenceContainer>       
+      
+<referenceBlock name="footer_links" remove="true"/>
+
+ <move element="know_us" destination="page.footer" before="-"/>
+
+
+    </body>
+</page>

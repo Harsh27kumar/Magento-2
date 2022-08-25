@@ -1,0 +1,22 @@
+<!--@subject Customform Notification @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{template config_path="design/email/header_template"}}
+<table>
+ <tr class="email-intro">
+ <th>Full Name</th><td>{{var name}}</td>
+ </tr>
+ <tr class="email-intro">
+ <th>Company Name</th><td>{{var company}}</td>
+ </tr>
+ <tr class="email-intro">
+ <th>Email Address</th><td>{{var email}}</td>
+ </tr>
+ </table>
+ 
+{{template config_path="design/email/footer_template"}}

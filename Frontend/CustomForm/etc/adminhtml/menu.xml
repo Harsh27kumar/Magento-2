@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Frontend_CustomForm::customform" title="CustomForm Data" module="Frontend_CustomForm" sortOrder="90" resource="Frontend_CustomForm::customform"/>
+        <add id="Frontend_CustomForm::post" title="Display Data" module="Frontend_CustomForm" sortOrder="90" action="frontend_customform/post" resource="Frontend_CustomForm::post" parent="Frontend_CustomForm::customform"/>
+    </menu>
+</config>

@@ -1,0 +1,48 @@
+
+<!Doctype html>
+<html>
+    <body>
+    <form action= "" method = "post" enctype= "multipart/form-data">
+    First name:<input type="text" name='first' ><br><br>
+    <div class= "error">
+    <?php if(!empty($data['first_error'])): ?>
+        <?php echo $data['first_error']; ?>
+        <?php endif; ?>
+
+    </div>
+    Last name:<input type="text" name="last" required><br><br>  <div class= "error">
+    <?php if(!empty($data['last_error'])): ?>
+        <?php echo $data['last_error']; ?>
+        <?php endif; ?>
+
+    </div>
+    Email-ID:<input type="text" name="email" required><br><br>
+    <?php if(!empty($data['email_error'])): ?>
+    <?php endif; ?>
+    
+    Mobile No.:<input type="text" name="mobile" required><br><br>
+    <div class= "error">
+    <?php if(!empty($data['mobile_error'])): ?>
+        <?php echo $data['mobile_error']; ?>
+        <?php endif; ?>
+
+    </div>
+    Address:<input type="text" name="address" required><br><br>
+    <div class= "error">
+    <?php if(!empty($data['address_error'])): ?>
+        <?php echo $data['address_error']; ?>
+        <?php endif; ?>
+
+    </div>
+   
+  
+    <input type="submit" value="Click To Submit" name="submit"><br>
+     
+
+  
+
+    </form>
+
+
+</body>
+</html>

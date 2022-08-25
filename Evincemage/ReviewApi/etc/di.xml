@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Evincemage\ReviewApi\Api\Data\ReviewInterface" type="Evincemage\ReviewApi\Model\Data\Review"/>
+    <preference for="Evincemage\ReviewApi\Api\Data\RatingVoteInterface" type="Evincemage\ReviewApi\Model\Data\RatingVote"/>
+    <preference for="Evincemage\ReviewApi\Api\ReviewRepositoryInterface" type="Evincemage\ReviewApi\Model\ReviewRepository"/>
+    <preference for="Evincemage\ReviewApi\Model\Review\Command\SaveInterface" type="Evincemage\ReviewApi\Model\Review\Command\Save"/>
+     <preference for="Evincemage\ReviewApi\Model\ReviewValidatorInterface" type="Evincemage\ReviewApi\Model\ReviewValidationChain"/>
+     <preference for="Evincemage\ReviewApi\Model\Review\ReviewTypeResolverInterface" type="Evincemage\ReviewApi\Model\Review\ReviewTypeResolver"/>
+
+</config>

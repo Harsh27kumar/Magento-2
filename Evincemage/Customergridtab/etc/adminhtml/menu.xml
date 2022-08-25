@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Evincemage_Customergridtab::customer" title="New Customer Tab"  module="Evincemage_Customergridtab" sortOrder="90" parent="Magento_Customer::customer" action="customergridtab/post/index/" resource="Evincemage_Customergridtab::grid"/>
+    </menu>
+</config>

@@ -1,0 +1,559 @@
+<p id="sg" style="font-size:19px; font-weight:bold;"></p>
+<div class="row">
+    <div class="col-md-8">
+        <form name="addData" method="post" id="addData" class="form"
+              action="<?php echo $this->getFormAction(); ?>"
+              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+              data-mage-init='{"validation":{}}'
+              id="form-validate-detail">
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Name/Address')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="title"><span><?= $block->
+                                escapeHtmlAttr(__('Title')) ?></span></label>
+                            <div class="control">
+                                <input name="title1" id="title1" title="Title" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="first"><span><?= $block->
+                                escapeHtmlAttr(__('First')) ?></span></label>
+                            <div class="control">
+                                <input name="first" id="first" title="First" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="">
+                            <label class="label" for="middle"><span><?= $block->
+                                escapeHtmlAttr(__('Middle Initial')) ?></span></label>
+                            <div class="control">
+                                <input name="middle" id="middle" title="Middle" value="" class="input-text" type="text"
+                                       data-validate="{ 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="last"><span><?= $block->
+                                escapeHtmlAttr(__('Last')) ?></span></label>
+                            <div class="control">
+                                <input name="last" id="last" title="Last" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>      
+                        <div class="field name required">
+                            <label class="label" for="name of business"><span><?= $block->
+                                escapeHtmlAttr(__('Name of Business')) ?></span></label>
+                            <div class="control">
+                                <input name="nameofbusiness" id="nameofbusiness" title="Name of Business" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address1" id="address1" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="city1"><span><?= $block->
+                                escapeHtmlAttr(__('City')) ?></span></label>
+                            <div class="control">
+                                <input name="city1" id="city1" title="City" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="state"><span><?= $block->
+                                escapeHtmlAttr(__('State')) ?></span></label>
+                            <div class="control">
+                                <input name="state1" id="state1" title="State" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="zip"><span><?= $block->
+                                escapeHtmlAttr(__('Zip')) ?></span></label>
+                            <div class="control">
+                                <input name="zip1" id="zip1" title="Zip" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="tax i.d. number"><span><?= $block->
+                                escapeHtmlAttr(__('Tax I.D. Number')) ?></span></label>
+                            <div class="control">
+                                <input name="taxid" id="taxid" title="Tax I.D. Number" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div> 
+                        <div class="field name required">
+                            <label class="label" for="phone1"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone1" id="phone1" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>    
+                    </div>
+                </fieldset>
+            </fieldset>
+
+
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Company Information')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="type of business"><span><?= $block->
+                                escapeHtmlAttr(__('Type of Business')) ?></span></label>
+                            <div class="control">
+                                <input name="typeofbusiness" id="typeofbusiness" title="Type of Business" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="in business since"><span><?= $block->
+                                escapeHtmlAttr(__('In Business Since')) ?></span></label>
+                            <div class="control">
+                                <input name="inbusinesssince1" id="inbusinesssince1" title="In Business Since" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="business operates1"><span><?= $block->
+                                escapeHtmlAttr(__('Legal Form Under Which Business Operates')) ?></span></label>
+                            <div class="control">
+                                <input type="checkbox" id="business operates1" name="business operates1" value="Corporation">
+  								<label for="business operates1">Corporation</label><br>
+                            </div>
+                            <div class="control">
+                                <input type="checkbox" id="business operates2" name="business operates2" value="Partnership">
+  								<label for="business operates2">Partnership</label><br>
+                            </div>
+                            <div class="control">
+                                <input type="checkbox" id="business operates3" name="business operates3" value="Proprietorship">
+  								<label for="business operates3">Proprietorship</label><br>
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="parent company"><span><?= $block->
+                                escapeHtmlAttr(__('If Division/Subsidiary, Name of Parent Company')) ?></span></label>
+                            <div class="control">
+                                <input name="parentCompany" id="parentcompany" title="if division/subsidiary, name of parent company" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="business since"><span><?= $block->
+                                escapeHtmlAttr(__('In Business Since')) ?></span></label>
+                            <div class="control">
+                                <input name="inbusinesssince2" id="inbusinesssince2" title="In Business Since" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="company for business transactions"><span><?= $block->
+                                escapeHtmlAttr(__('Name of Company Principal Responsible for Business Transactions')) ?></span></label>
+                            <div class="control">
+                                <input name="companyforbusinesstransactions" id="companyforbusinesstransactions" title="Name of Company Principal Responsible for Business Transactions" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div> 
+                        <div class="field name required">
+                            <label class="label" for="title2"><span><?= $block->
+                                escapeHtmlAttr(__('Title')) ?></span></label>
+                            <div class="control">
+                                <input name="title2" id="title2" title="Title" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div> 
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address2" id="address2" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>          
+                        <div class="field name required">
+                            <label class="label" for="city"><span><?= $block->
+                                escapeHtmlAttr(__('City')) ?></span></label>
+                            <div class="control">
+                                <input name="city2" id="city2" title="City" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="state"><span><?= $block->
+                                escapeHtmlAttr(__('State')) ?></span></label>
+                            <div class="control">
+                                <input name="state2" id="state2" title="State" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>     
+                        <div class="field name required">
+                            <label class="label" for="zip"><span><?= $block->
+                                escapeHtmlAttr(__('Zip')) ?></span></label>
+                            <div class="control">
+                                <input name="zip2" id="zip2" title="Zip" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone2"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone2" id="phone2" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>    
+                    </div>
+                </fieldset>
+            </fieldset>
+
+
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Bank References')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="institution name"><span><?= $block->
+                                escapeHtmlAttr(__('Institution Name')) ?></span></label>
+                            <div class="control">
+                                <input name="institutionname1" id="institutionname1" title="Institution Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="checking account"><span><?= $block->
+                                escapeHtmlAttr(__('Checking Account #')) ?></span></label>
+                            <div class="control">
+                                <input name="checkingaccount" id="checkingaccount" title="Checking Account" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="address3"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address3" id="address3" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone3"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone3" id="phone3" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="institution name2"><span><?= $block->
+                                escapeHtmlAttr(__('Institution Name')) ?></span></label>
+                            <div class="control">
+                                <input name="institutionname2" id="institutionname2" title="Institution Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="saving account"><span><?= $block->
+                                escapeHtmlAttr(__('Savings Account #')) ?></span></label>
+                            <div class="control">
+                                <input name="savingsaccount " id="savingsaccount" title="Savings Account" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="address4"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address4" id="address4" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone4"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone4" id="phone4" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="institution name"><span><?= $block->
+                                escapeHtmlAttr(__('Institution Name')) ?></span></label>
+                            <div class="control">
+                                <input name="institutionname3" id="institutionname3" title="Institution Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="home equity loan"><span><?= $block->
+                                escapeHtmlAttr(__('Home Equity Loan')) ?></span></label>
+                            <div class="control">
+                                <input name="homeequityloan " id="homeequityloan" title="Home Equity Loan" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="loan balance"><span><?= $block->
+                                escapeHtmlAttr(__('Loan Balance')) ?></span></label>
+                            <div class="control">
+                                <input name="loanbalance" id="loanbalance" title="Loan Balance" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address5" id="address5" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone5" id="phone5" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </fieldset>
+
+
+
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtmlAttr(__('Trade References')) ?></span></legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="company name"><span><?= $block->
+                                escapeHtmlAttr(__('Company Name')) ?></span></label>
+                            <div class="control">
+                                <input name="companyname1" id="companyname1" title="Company Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="contact name"><span><?= $block->
+                                escapeHtmlAttr(__('Contact Name')) ?></span></label>
+                            <div class="control">
+                                <input name="contactname1" id="contactname1" title="Contact Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address6" id="address6" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone6" id="phone6" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="accoutnt opened since"><span><?= $block->
+                                escapeHtmlAttr(__('Account Opened Since')) ?></span></label>
+                            <div class="control">
+                                <input name="accountopenedsince1" id="accountopenedsince1" title="Account Opened Since" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="credit limit"><span><?= $block->
+                                escapeHtmlAttr(__('Credit Limit')) ?></span></label>
+                            <div class="control">
+                                <input name="creditlimit1" id="creditlimit1" title="Credit Limit" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="current balance"><span><?= $block->
+                                escapeHtmlAttr(__('Current Balance')) ?></span></label>
+                            <div class="control">
+                                <input name="currentbalance1" id="currentbalance1" title="Current Balance" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="company name"><span><?= $block->
+                                escapeHtmlAttr(__('Company Name')) ?></span></label>
+                            <div class="control">
+                                <input name="companyname2" id="companyname2" title="Company Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="contact name"><span><?= $block->
+                                escapeHtmlAttr(__('Contact Name')) ?></span></label>
+                            <div class="control">
+                                <input name="contactname2" id="contactname2" title="Contact Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address7" id="address7" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone7" id="phone7" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="account opened since"><span><?= $block->
+                                escapeHtmlAttr(__('Account Opened Since')) ?></span></label>
+                            <div class="control">
+                                <input name="accountopenedsince2" id="accountopenedsince2" title="Account Opened Since" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="credit limit"><span><?= $block->
+                                escapeHtmlAttr(__('Credit Limit')) ?></span></label>
+                            <div class="control">
+                                <input name="creditlimit2" id="creditlimit2" title="Credit Limit" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="current balance"><span><?= $block->
+                                escapeHtmlAttr(__('Current Balance')) ?></span></label>
+                            <div class="control">
+                                <input name="currentbalance2" id="currentbalance2" title="Current Balance" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="company name"><span><?= $block->
+                                escapeHtmlAttr(__('Company Name')) ?></span></label>
+                            <div class="control">
+                                <input name="companyname3" id="companyname3" title="Company Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="contact name"><span><?= $block->
+                                escapeHtmlAttr(__('Contact Name')) ?></span></label>
+                            <div class="control">
+                                <input name="contactname3" id="contactname3" title="Contact Name" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        
+                        <div class="field name required">
+                            <label class="label" for="address"><span><?= $block->
+                                escapeHtmlAttr(__('Address')) ?></span></label>
+                            <div class="control">
+                                <input name="address8" id="address8" title="Address" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="phone"><span><?= $block->escapeHtmlAttr(__('Phone')) ?></span></label>
+                            <div class="control">
+                                <input name="phone8" id="phone8" title="Phone" value="" class="input-text"
+                                       type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="account opened since"><span><?= $block->
+                                escapeHtmlAttr(__('Account Opened Since')) ?></span></label>
+                            <div class="control">
+                                <input name="accountopenedsince3" id="accountopenedsince3" title="Account Opened Since" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    	<div class="field name required">
+                            <label class="label" for="credit limit"><span><?= $block->
+                                escapeHtmlAttr(__('Credit Limit')) ?></span></label>
+                            <div class="control">
+                                <input name="creditlimit3" id="creditlimit3" title="Credit Limit" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>    
+                        <div class="field name required">
+                            <label class="label" for="current balance"><span><?= $block->
+                                escapeHtmlAttr(__('Current Balance')) ?></span></label>
+                            <div class="control">
+                                <input name="currentbalance3" id="currentbalance3" title="Current Balance" value="" class="input-text" type="text"
+                                       data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+                        
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="Save"><span><?= $block->
+                        escapeHtmlAttr(__('Submit')) ?></span></button>
+                </div>
+            </div>
+            <div class="fields col-md-6">
+            	<div class="field name required">
+            		<div class="control">
+                        <input type="checkbox" id="submit" name="submit" value="">
+                        <label for="submit">By clicking the Submit Application button I hereby certify that the information contained herein is complete and accurate. This information has been furnished with the understanding that it is to be used to determine the amount and conditions of the credit to be extended. Furthermore, I hereby authorize the financial institutions listed in this credit application to release necessary information to the company for which credit is being applied for in order to verify the information contained herein.</label><br>
+									
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+require([
+    "jquery",
+    "mage/mage"
+],function($) {
+    $(document).ready(function() {
+        $('#addData').mage(
+            'validation',
+            { 
+                submitHandler: function(form) {
+                    var customurl = "<?php echo $this->getUrl().'customform/index/submit'?>";
+
+                    $.ajax({
+                        url: customurl,
+                        data: $('#addData').serialize(),
+                        type: 'POST',
+                        dataType: 'json',
+                        showLoader: true,
+                        success: function(data, status, xhr) {
+                            $('#sg').text("Saved Successfully");
+                        },
+                        error: function (xhr, status, errorThrown) {
+                            console.log('Error happens. Try again.');
+                            console.log(errorThrown);
+                        }
+                    });
+                }
+            }
+        );
+    });
+});
+</script>

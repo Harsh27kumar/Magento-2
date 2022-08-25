@@ -1,0 +1,1 @@
+In this module a custom frontend form is created and data is saved in database using ajax method and displayed at custom menu in admin in grid.

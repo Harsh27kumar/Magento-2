@@ -1,0 +1,30 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $model=$objectManager->create('Purchased\Products\Model\Products');
+    //$datacollection=$block->getCollection();
+    $datacollection=$model->getCollection();
+    echo "<table border=1><tr align=center><th>Item Id</th><th>Product Name</th><th>Product Sku</th><th>Order Date</th></tr>";
+    foreach ($datacollection as $data) {
+        echo "<tr align=center>";
+            echo "<td>".$data->getitem_id()."</td>";
+            echo "<td>".$data->getname()."</td>";
+            echo "<td>".$data->getsku()."</td>";
+            echo "<td>".$data->getcreated_at()."</td>";
+
+        echo "</tr>";
+    }
+    echo "</table>";
+
+    ?>
+
+    <?php
+    /*
+    $ids=[1,2,3];
+    $categoryProducts = $block->getProductCollectionByCategories($ids);
+    foreach($categoryProducts as $product){
+        echo $product->getName().'-'.$product->getProductUrl().'<br/>';
+        
+    }   
+     */
+
+    ?>

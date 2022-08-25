@@ -1,0 +1,87 @@
+<!--
+<form method="POST" name="custom_view">
+    <label class="label" for="nickname"><span>Nickname</span></label>
+    <input name="nickname" id="nickname" title="nickname" class="nickname" type="text">
+    <label class="label" for="textreview"><span>Text Review</span></label>
+    <input name="textreview" id="textreview" title="textreview" class="textreview" type="text">
+
+    <button type="submit" title="Submit" class="actionSubmitPrimary" id="submit_data">
+        <span>Submit Review</span>
+    </button>
+</form>
+<script>
+    require(['jquery'],function($){
+        $('#submit_data').on('click', function (){
+            var nickName = $("input[name='nickname']").val();
+            var textReview = $("input[name='textreview']").val();
+            var url = "<?php //echo $block->getUrl('reviews/index/save') ?>";
+              jQuery.ajax({
+                url: url,
+                type: "POST",
+                data: {nickname:nickName,textreview:textReview},
+                showLoader: true,
+            });
+        });
+    });
+</script>
+-->
+<p id="sg" style="font-size:19px; font-weight:bold;"></p>
+<form method="POST" name="review_form" id="review_form">
+    <span> Name:<input name="nickname" id="nickname" title="nickname" class="nickname" type="text"></span>
+    <span>Email:<input name="textreview" id="textreview" title="textreview" class="textreview" type="text"><br></span>
+    <br><button id="submit_demo_data">Submit Review</button>
+</form>
+
+<!--
+<table id='display_data'>
+    <tr>
+        <th>Id</th><th>Nick Name</th><th>Text Review</th>
+    </tr>
+</table>
+-->
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/mage"
+    ],function($) {
+        $(document).ready(function() {
+            $('#review_form').mage(
+                'validation',
+                {
+                    submitHandler: function(form) {
+                        var customurl = "<?php echo $this->getUrl().'reviews/index/save'?>";
+                        $.ajax({
+                            url: customurl,
+                            data: $('#review_form').serialize(),
+                            type: 'POST',
+                            dataType: 'json',
+                            showLoader: true,
+                            cache: false,
+                            
+                           /* success: function(data, status, xhr) {
+                               // $('#display_data').append("<tr><td>" + data.id + "</td><td>" + data.nickname + "</td><td>" + data.textreview + "</td></tr>");
+                               // $("#review_form").trigger('reset');
+                                 $("#review_form").load(url,data,function(response, status, xhr));
+
+                            },
+
+                            error: function (xhr, status, errorThrown) {
+                                console.log('Error happens. Try again.');
+                                console.log(errorThrown);
+                            }*/
+                           success: function(){
+                
+                         $('#sg').text("Name and Email Saved Successfully");
+                 //  form.find('.review_form').addClass("alert alert-success").html("Successful");
+                 //  window.setTimeout(function(){location.reload()},3000);
+                },
+
+                        });
+                       
+                    }
+                }
+            );
+        });
+    });
+</script>

@@ -1,0 +1,1 @@
+In this module a custom Image option is added at product update page 

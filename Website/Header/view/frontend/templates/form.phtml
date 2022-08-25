@@ -1,0 +1,19 @@
+<?php
+$countryList=$block->getCountries();
+$regionList=$block->getRegion();
+?>
+<div class="field country">
+    <label class="label" for="country"><span><?php echo __('Country') ?></span></label>
+    <div class="control">
+        <?php echo $countryList?>
+    </div>
+</div>
+<div class="field country">
+    <label class="label" for="region"><span><?php  echo __('Region') ?></span></label>
+    <div class="control">
+        <?php echo $regionList?>
+    </div>
+</div>
+
+
+

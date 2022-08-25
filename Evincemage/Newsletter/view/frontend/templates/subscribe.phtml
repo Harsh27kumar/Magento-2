@@ -1,0 +1,91 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+?>
+<div class="block newsletter">
+    <div class="title"><strong><?= $block->escapeHtml(__('Newsletter')) ?></strong></div>
+    <div class="content">
+        <form class="form subscribe"
+            novalidate
+            method="post"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+            id="newsletter-validate-detail">
+            <div class="field newsletter">
+                <div class="control">
+                    <label for="newsletter">
+                        <span class="label">
+                            <?= $block->escapeHtml(__('Sign Up for Our Newsletter:')) ?>
+                        </span>
+                        <input name="email" type="email" id="newsletter"
+                               placeholder="<?= $block->escapeHtml(__('Enter your email address')) ?>"
+                               data-mage-init='{"mage/trim-input":{}}'
+                               data-validate="{required:true, 'validate-email':true}"
+                        />
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="field name required">
+            <label class="label" for="subscriber_name">
+                <span><?= $block->escapeHtml(__('Name')) ?></span>
+            </label>
+
+            <div class="control">
+                <input type="text" class="input-text" id="subscriber_name" name="subscriber_name"
+                placeholder="<?= $block->escapeHtml(__('Enter your Name')) ?>"
+                       data-validate="{required:true}"/>
+            </div>
+        </div>
+            <div class="actions">
+                <button class="action subscribe primary"
+                        title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>"
+                        type="submit"
+                        id="submit";
+                        aria-label="Subscribe">
+                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <p id="sg" style="font-size:19px; font-weight:bold;"></p>
+</div>
+<script>
+    require(['jquery'],function(){
+     jQuery(document).ready(function() {
+        
+        setTimeout(function(){
+            jQuery('#sg').hide();
+        }, 30000);
+           jQuery('#submit').click(function(){
+
+            
+                var dataform=jQuery('#newsletter-validate-detail');
+                var param = dataform.serialize();
+                var url = "<?php echo $this->getUrl('newsletter/subscriber/new') ?>";
+            jQuery.ajax({
+            url: url,
+            type: "POST",
+            data: param,
+            showLoader: true,
+            cache: false,
+           // success: function(response){
+            //console.log("response");
+            
+            success: function(param){
+                
+            jQuery('#sg').text("Name and Email Saved Successfully");
+               
+            },
+        });
+      return false;
+
+
+});
+
+});
+    });
+</script>

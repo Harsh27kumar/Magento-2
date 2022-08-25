@@ -1,0 +1,1 @@
+In this module custom footer option is added at frontend.

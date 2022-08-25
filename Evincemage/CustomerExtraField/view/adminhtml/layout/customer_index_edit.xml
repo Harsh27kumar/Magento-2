@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_form">
+            <block class="Evincemage\CustomerExtraField\Block\Adminhtml\Edit\Tab\View" name="socialform_panel">
+                <arguments>
+                    <argument name="socialform_panel" xsi:type="string" translate="true">Social Form</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

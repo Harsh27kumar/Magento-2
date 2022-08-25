@@ -1,0 +1,1 @@
+In this module a custom product attribute name is featured is created in which customer select yes/no on the basis of that product is visible in frontend.

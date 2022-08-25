@@ -1,0 +1,16 @@
+table.table-checkout-shipping-method.custom-shipping {
+    border: 1px solid #ccc;
+    margin: 10px;
+}
+.table-checkout-shipping-method tbody td:first-child {
+    padding-left: 10px;
+}
+.table-checkout-shipping-method tbody td {
+    border-top: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.field.addresses {
+    margin-bottom: 10px;
+}

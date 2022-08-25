@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+ 
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Website_Countdown::css/jquery.countdownTimer.css"/>
+    </head>
+    <referenceContainer name="product.info.main">
+        <block class="Website\Countdown\Block\Product\View" name="product.info.timer" as="productInfoCountdown" template="Website_Countdown::countdown.phtml" after="alert.urls"/>        
+    </referenceContainer>
+</page>

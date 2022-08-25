@@ -1,0 +1,1 @@
+In this module previous customer group is displayed with time and username who change the customer group in a grid at admin->customer->all customer.

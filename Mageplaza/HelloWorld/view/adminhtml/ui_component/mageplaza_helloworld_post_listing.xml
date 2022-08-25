@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<bookmark name="bookmarks"/>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<columnsControls name="columns_controls"/>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<filterSearch name="fulltext"/>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<filters name="listing_filters" />
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="mageplaza_helloworld/post/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Post</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<paging name="listing_paging"/>
+    </listingToolbar>
+    <!-- ... other block of code -->
+    <?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!-- ... other block of code -->
+    <listingToolbar name="listing_top">
+	<!-- ... other block of code -->    
+	<exportButton name="export_button"/>
+    </listingToolbar>
+    <!-- ... other block of code -->
+</listing>
+</listing>
+</listing>
+</listing>
+</listing>
+</listing>
+</listing>
+</listing>
