@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="evincemage" sortOrder="200">
+            <label>Evincemage</label>
+        </tab>
+		<section id="shipping_cutoff" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Shipping Cutoff Timer</label>
+			<tab>evincemage</tab>
+			<resource>Magelumen_ShippingTimer::config_shippingTimer</resource>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Evincemage Shipping Timer</label>
+				<field id="isEnable" translate="label" type="select" sortOrder="5" showInDefault="1" showInStore="10" showInWebsite="1">
+                    <label>Enable Timer</label>
+                    <comment><![CDATA[Enable shipping Cutoff Timer]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="shippingCutoffFrom" translate="label" type="date" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>From</label>
+                    <comment><![CDATA[Date Format will be mm/dd/yyyy]]></comment>
+                    <frontend_model>Evincemage\ShippingTimer\Block\Adminhtml\System\Config\DateTime</frontend_model>
+                </field>
+				<field id="shippingCutoffTo" translate="label" type="date" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>To</label>
+                    <comment><![CDATA[Date Format will be mm/dd/yyyy]]></comment>
+                    <frontend_model>Evincemage\ShippingTimer\Block\Adminhtml\System\Config\DateTime</frontend_model>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

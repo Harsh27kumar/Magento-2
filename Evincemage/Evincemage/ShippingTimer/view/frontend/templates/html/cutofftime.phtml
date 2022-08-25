@@ -1,0 +1,71 @@
+<?php
+//echo "testing";exit();
+$helper = $this->helper("Evincemage\ShippingTimer\Helper\Data");
+$configValues = $helper->getConfigData();
+$storeCurrentDate = $helper->getCurrentDateTime();
+
+$currentDate = strtotime($storeCurrentDate);  
+
+// Declare and define two dates 
+// echo "Form date".$configValues['date-from'];echo "<br>";
+// echo "To date".$configValues['date-to'];echo "<br>";
+$groundDateTo = strtotime($configValues['date-to']);  
+$groundDiff = $currentDate - $groundDateTo; 
+
+// If time is greater then 0 that means Target date been gone.
+if($groundDiff > 0 ){
+    $groundDiff = 0;
+}
+
+?>
+<?php if($configValues['isEnable']): ?>
+<section class="shipping-cutoff-section">
+    <div class="cuttoff-container">
+        <div class="shipping-cutoff">
+            <!-- <div class="shipping-image-content">
+                <div class=shipping-image>
+                    <img src="https://pngimage.net/wp-content/uploads/2018/05/fast-delivery-icon-png-5.png" class="img-responsive" alt="Image">
+                </div>
+            </div> -->
+            <div class="mobile-design">
+                <div class="shipping-ground-content">
+                    <div class=shipping-timing>
+                        <p class=shipping-label>SHIPPING CUTOFF TIME </p>
+                        <h2 class="timing" id="shippingTimer"></h2>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+/** ================================================================== **/
+/** ==================== shipping GROUND CUTOFF TIME ==================== **/
+/** ================================================================== **/
+var groundTime = "<?php echo abs($groundDiff); ?>";
+var groundSeconds = groundTime;
+function groundTimer() {
+    var days        = Math.floor(groundSeconds/24/60/60);
+    var hoursLeft   = Math.floor((groundSeconds) - (days*86400));
+    var hours       = Math.floor(hoursLeft/3600);
+    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+    var minutes     = Math.floor(minutesLeft/60);
+    var remainingSeconds = groundSeconds % 60;
+    function pad(n) {
+        return (n < 10 ? "0" + n : n);
+    }
+    //document.getElementById('shippingTimer').innerHTML = pad(days) + "Day " + pad(hours) + "hours " + pad(minutes) + "minutes " + pad(remainingSeconds)+"ss";
+
+    document.getElementById('shippingTimer').innerHTML = pad(hours) + " HOURS " + pad(minutes) + " MINUTES " + pad(remainingSeconds)+" SECONDS ";
+    if (groundSeconds == 0) {
+        clearInterval(groundCountdownTimer);
+        document.getElementById('shippingTimer').innerHTML = "00dd 00hh 00mm 00ss";
+    } else {
+        groundSeconds--;
+    }
+}
+var groundCountdownTimer = setInterval('groundTimer()', 1000);
+
+</script>
+<?php endif; ?>
